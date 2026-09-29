@@ -83,7 +83,10 @@ SUBSAMPLE_AND_TRIM ◄─────────────┘
                                                                                 │
                                                                                 ▼
                                                                          INDEX_SAMPLE_MT
+
 ```
+A more detail diagram is available at https://github.com/dpuiu/MitoHPC2.nf/blob/main/MitoHPC2.svg
+
 
 ## Input Data
 
