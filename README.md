@@ -1,6 +1,7 @@
 # MitoHPC2.nf 
 
-`MitoHPC2.sr.nf` is a **Nextflow DSL2 workflow for mitochondrial DNA (mtDNA) analysis from paired-end short-read sequencing data** and the Nextflow implementation of the original 
+`MitoHPC2.sr.nf` is a **workflow for mitochondrial DNA (mtDNA) analysis from paired-end short-read sequencing data** 
+It is the Nextflow implementation of the original:
 * [MitoHPC2](https://github.com/dpuiu/MitoHPC2) short read/long read pipeline (newer).
 * [MitoHPC](https://github.com/dpuiu/MitoHPC2)  short read pipeline (older).
 
@@ -20,7 +21,6 @@ Main analysis steps include:
 This pipeline includes only the first SNV calling iteration  so far.
 
 Using **Nextflow DSL2** provides reproducible workflow execution and portability across computing environments.
-
 
 ## Workflow Overview
 
