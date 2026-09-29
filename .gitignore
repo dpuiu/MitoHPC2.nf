@@ -2,3 +2,5 @@ node_modules/
 *.swp
 __pycache__/
 *.pyc
+.nextflow*
+out/*
