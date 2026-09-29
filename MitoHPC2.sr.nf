@@ -1,15 +1,29 @@
 workflow {
 
+    // check input files
+    if( !params.reference ) error "Missing required parameter: --reference"
+    if( !params.mt_reference ) error "Missing required parameter: --mt_reference"
+    if( !params.mtc_reference ) error "Missing required parameter: --mtc_reference"
+    if( !params.numt_reference ) error "Missing required parameter: --numt_reference"
+    if( !params.mt_fai ) error "Missing required parameter: --mt_fai"
+
+    // create channels
     reference_ch = channel.value(file(params.reference))
     mt_reference_ch = channel.value(file(params.mt_reference))
     mtc_reference_ch = channel.value(file(params.mtc_reference))
     numt_reference_ch = channel.value(file(params.numt_reference))
     mt_fai_ch = channel.value(file(params.mt_fai))
+    reads_ch = channel.fromFilePairs("${projectDir}/fastq/*_{1,2}.fastq.gz", checkIfExists: true)
 
-    reads_ch = channel
-        .fromFilePairs("${projectDir}/data/*_{1,2}.fastq.gz", checkIfExists: true)
-
+    // step 1: align reads to the reference
+    println "reads_ch: ";     reads_ch.view()
+    println "reference_ch: "; reference_ch.view()
     bam_ch = ALIGN_REFERENCE(reads_ch, reference_ch)
+
+    exit 0
+    
+    /////////////////////////////////////////////////////////////////////////
+
     indexed_bam_ch = INDEX_ALIGNMENT(bam_ch)
 
     stats_ch = COMPUTE_ALIGNMENT_STATS(
@@ -143,7 +157,6 @@ process COMPUTE_ALIGNMENT_STATS {
     """
 }
 
---- 
 //////////////////////////////////
 // GET MTDNA-CN; error messagel exist if very loaw counts
 process COMPUTE_MTDNA_COPY_NUMBER {
@@ -593,9 +606,7 @@ process CALL_SNVS_VARSCAN {
     bcftools query \
         -f '%CHROM\\t%POS\\t%ID\\t%REF\\t%ALT\\t%QUAL\\t%FILTER\\t.\\tGT:DP:AD:AF\\t[%GT:%DP:%AD:%FREQ]\\n' \
         ${sample_id}.orig.vcf \
-    | perl -lane '
-        print "$1:", int($2 * 100 + .5) / 10000 if (/(.+):(.+)%$/);
-    ' \
+    | perl -lane 'print "\$1:", int(\$2 * 100 + .5) / 10000 if (/(.+):(.+)%\$/);' \
     | sort -k2,2n \
     >> ${sample_id}.vcf
     """

@@ -1,0 +1,189 @@
+Sep-29 16:01:50.844 [main] DEBUG nextflow.cli.Launcher - $> nextflow run MitoHPC2.sr.nf -preview
+Sep-29 16:01:50.882 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Sep-29 16:01:50.894 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/dpuiu/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Sep-29 16:01:50.905 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Sep-29 16:01:50.906 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Sep-29 16:01:50.907 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Sep-29 16:01:50.915 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Sep-29 16:01:50.976 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Sep-29 16:01:50.988 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/dpuiu/Documents/JHU/MitoHPC2.nf/nextflow.config
+Sep-29 16:01:50.989 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/dpuiu/Documents/JHU/MitoHPC2.nf/nextflow.config
+Sep-29 16:01:51.000 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Sep-29 16:01:51.300 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Sep-29 16:01:51.301 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Sep-29 16:01:51.307 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/dpuiu/.nextflow/secrets/store.json
+Sep-29 16:01:51.309 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@2da16263] - activable => nextflow.secret.LocalSecretsProvider@2da16263
+Sep-29 16:01:51.315 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Sep-29 16:01:51.323 [main] DEBUG nextflow.cli.CmdRun - * PREVIEW * null [silly_pesquet] DSL2 - revision: 9cc7539080
+Sep-29 16:01:51.346 [main] DEBUG nextflow.Session - Session UUID: 55131f8c-af63-4cf8-be33-cff612805db4
+Sep-29 16:01:51.346 [main] DEBUG nextflow.Session - Run name: silly_pesquet
+Sep-29 16:01:51.346 [main] DEBUG nextflow.Session - Executor pool size: 28
+Sep-29 16:01:51.350 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Sep-29 16:01:51.352 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=84; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Sep-29 16:01:51.361 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11173
+  Created: 10-02-2026 15:17 UTC (10:17 EDT)
+  System: Linux 7.0.0-28-generic
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.12.1+1-1-24.04.4-Ubuntu
+  Encoding: UTF-8 (UTF-8)
+  Process: 1824047@dpuiu-XPS-8960 [127.0.1.1]
+  CPUs: 28 - Mem: 15.3 GB (1.2 GB) - Swap: 4 GB (70.3 MB)
+Sep-29 16:01:51.387 [main] DEBUG nextflow.Session - Work-dir: /home/dpuiu/Documents/JHU/MitoHPC2.nf/work [ext2/ext3]
+Sep-29 16:01:51.387 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/dpuiu/Documents/JHU/MitoHPC2.nf/bin
+Sep-29 16:01:51.393 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Sep-29 16:01:51.397 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Sep-29 16:01:51.398 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Sep-29 16:01:51.420 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Sep-29 16:01:51.424 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 29; maxThreads: 1000
+Sep-29 16:01:51.452 [main] DEBUG nextflow.Session - Session start
+Sep-29 16:01:51.455 [main] DEBUG nextflow.Session - DAG file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/dag.html -- enable `dag.overwrite` in your config file to overwrite existing DAG files
+nextflow.exception.AbortOperationException: DAG file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/dag.html -- enable `dag.overwrite` in your config file to overwrite existing DAG files
+	at nextflow.trace.GraphObserver.onFlowCreate(GraphObserver.groovy:75)
+	at nextflow.Session$_notifyFlowCreate_lambda34.doCall(Session.groovy:1107)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowCreate(Session.groovy:1107)
+	at nextflow.Session.start(Session.groovy:596)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Sep-29 16:01:51.457 [main] DEBUG nextflow.Session - Report file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/report.html -- enable the 'report.overwrite' option in your config file to overwrite existing files
+nextflow.exception.AbortOperationException: Report file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/report.html -- enable the 'report.overwrite' option in your config file to overwrite existing files
+	at nextflow.trace.ReportObserver.onFlowCreate(ReportObserver.groovy:119)
+	at nextflow.Session$_notifyFlowCreate_lambda34.doCall(Session.groovy:1107)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowCreate(Session.groovy:1107)
+	at nextflow.Session.start(Session.groovy:596)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Sep-29 16:01:51.457 [main] DEBUG nextflow.Session - Timeline file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/timeline.html -- enable the 'timeline.overwrite' option in your config file to overwrite existing files
+nextflow.exception.AbortOperationException: Timeline file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/timeline.html -- enable the 'timeline.overwrite' option in your config file to overwrite existing files
+	at nextflow.trace.TimelineObserver.onFlowCreate(TimelineObserver.groovy:80)
+	at nextflow.Session$_notifyFlowCreate_lambda34.doCall(Session.groovy:1107)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowCreate(Session.groovy:1107)
+	at nextflow.Session.start(Session.groovy:596)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Sep-29 16:01:51.457 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/trace.txt
+Sep-29 16:01:51.457 [main] DEBUG nextflow.Session - Trace file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/trace.txt -- enable the 'trace.overwrite' option in your config file to overwrite existing files
+nextflow.exception.AbortOperationException: Trace file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/trace.txt -- enable the 'trace.overwrite' option in your config file to overwrite existing files
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:67)
+	at nextflow.trace.TraceFileObserver.onFlowCreate(TraceFileObserver.groovy:174)
+	at nextflow.Session$_notifyFlowCreate_lambda34.doCall(Session.groovy:1107)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowCreate(Session.groovy:1107)
+	at nextflow.Session.start(Session.groovy:596)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Caused by: java.nio.file.FileAlreadyExistsException: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/trace.txt
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:94)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:482)
+	at java.base/java.nio.file.Files.newOutputStream(Files.java:228)
+	at java.base/java.nio.file.Files.newBufferedWriter(Files.java:3001)
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:64)
+	... 9 common frames omitted
+Sep-29 16:01:51.731 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Sep-29 16:01:51.804 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_134011aac1b01f8b: /home/dpuiu/Documents/JHU/MitoHPC2.nf/MitoHPC2.sr.nf
+Sep-29 16:01:51.804 [main] DEBUG nextflow.Session - Session aborted -- Cause: Argument of `file()` function cannot be null
+Sep-29 16:01:51.810 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Sep-29 16:01:51.860 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Sep-29 16:01:52.208 [main] WARN  nextflow.trace.ReportObserver - Failed to render execution report -- see the log file for details
+nextflow.exception.AbortOperationException: Report file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/report.html -- enable the 'report.overwrite' option in your config file to overwrite existing files
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:67)
+	at nextflow.trace.ReportObserver.renderHtml(ReportObserver.groovy:243)
+	at nextflow.trace.ReportObserver.onFlowComplete(ReportObserver.groovy:129)
+	at nextflow.Session$_notifyFlowComplete_lambda39.doCall(Session.groovy:1121)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowComplete(Session.groovy:1121)
+	at nextflow.Session.shutdown0(Session.groovy:779)
+	at nextflow.Session.abort(Session.groovy:834)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:150)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Caused by: java.nio.file.FileAlreadyExistsException: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/report.html
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:94)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:482)
+	at java.base/java.nio.file.Files.newOutputStream(Files.java:228)
+	at java.base/java.nio.file.Files.newBufferedWriter(Files.java:3001)
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:64)
+	... 11 common frames omitted
+Sep-29 16:01:52.209 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Sep-29 16:01:52.243 [main] WARN  nextflow.trace.TimelineObserver - Failed to render execution timeline -- see the log file for details
+nextflow.exception.AbortOperationException: Timeline file already exists: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/timeline.html -- enable the 'timeline.overwrite' option in your config file to overwrite existing files
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:67)
+	at nextflow.trace.TimelineObserver.renderHtml(TimelineObserver.groovy:164)
+	at nextflow.trace.TimelineObserver.onFlowComplete(TimelineObserver.groovy:91)
+	at nextflow.Session$_notifyFlowComplete_lambda39.doCall(Session.groovy:1121)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowComplete(Session.groovy:1121)
+	at nextflow.Session.shutdown0(Session.groovy:779)
+	at nextflow.Session.abort(Session.groovy:834)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:150)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Caused by: java.nio.file.FileAlreadyExistsException: /home/dpuiu/Documents/JHU/MitoHPC2.nf/out/timeline.html
+	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:94)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
+	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:261)
+	at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:482)
+	at java.base/java.nio.file.Files.newOutputStream(Files.java:228)
+	at java.base/java.nio.file.Files.newBufferedWriter(Files.java:3001)
+	at nextflow.trace.TraceHelper.newFileWriter(TraceHelper.groovy:64)
+	... 11 common frames omitted
+Sep-29 16:01:52.244 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Sep-29 16:01:52.244 [main] DEBUG nextflow.Session - Cannot invoke "groovyx.gpars.agent.Agent.await()" because "this.writer" is null
+java.lang.NullPointerException: Cannot invoke "groovyx.gpars.agent.Agent.await()" because "this.writer" is null
+	at nextflow.trace.TraceFileObserver.onFlowComplete(TraceFileObserver.groovy:189)
+	at nextflow.Session$_notifyFlowComplete_lambda39.doCall(Session.groovy:1121)
+	at nextflow.Session.notifyEvent(Session.groovy:1151)
+	at nextflow.Session.notifyFlowComplete(Session.groovy:1121)
+	at nextflow.Session.shutdown0(Session.groovy:779)
+	at nextflow.Session.abort(Session.groovy:834)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:150)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
+Sep-29 16:01:52.246 [main] ERROR nextflow.cli.Launcher - Argument of `file()` function cannot be null
+java.lang.IllegalArgumentException: Argument of `file()` function cannot be null
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.Nextflow.file(Nextflow.groovy:116)
+	at nextflow.Nextflow.file(Nextflow.groovy)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at Script_134011aac1b01f8b$_runScript_closure1$_closure27.doCall(Script_134011aac1b01f8b:3)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:280)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at groovy.lang.Closure.call(Closure.java:433)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:205)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:189)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:249)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:260)
+	at nextflow.script.parser.v1.ScriptLoaderV1.runScript(ScriptLoaderV1.groovy:246)
+	at nextflow.script.parser.v1.ScriptLoaderV1.runScript(ScriptLoaderV1.groovy)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:246)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:139)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:429)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)
