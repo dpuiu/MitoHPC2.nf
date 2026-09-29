@@ -1,8 +1,26 @@
-# MitoHPC2 Short Read Nextflow Pipeline
+# MitoHPC2.nf 
 
-`MitoHPC2.sr.nf` is a **Nextflow DSL2 workflow for mitochondrial DNA (mtDNA) analysis from paired-end short-read sequencing data**.
+`MitoHPC2.sr.nf` is a **Nextflow DSL2 workflow for mitochondrial DNA (mtDNA) analysis from paired-end short-read sequencing data** and the Nextflow implementation of the original 
+* [MitoHPC2](https://github.com/dpuiu/MitoHPC2) short read/long read pipeline (newer).
+* [MitoHPC](https://github.com/dpuiu/MitoHPC2)  short read pipeline (older).
 
-The workflow takes paired-end FASTQ files, aligns them to a whole-genome reference, identifies mitochondrial reads while distinguishing mitochondrial sequences from NUMTs, generates a mitochondrial BAM, calls variants using multiple callers, normalizes and selects variants, and produces downstream mitochondrial annotations and a sample-specific mitochondrial sequence.
+The workflow takes Illumina paired-end FASTQ files, aligns them to a whole-genome reference, identifies mitochondrial reads while distinguishing mitochondrial sequences from NUMTs, generates a mitochondrial BAM, calls variants using multiple callers, normalizes and selects variants, and performs downstream mitochondrial analyses.
+
+Main analysis steps include:
+
+* Whole-genome alignment (new)
+* mtDNA read extraction
+* mtDNA/NUMT read discrimination
+* mtDNA coverage and quality analysis
+* SNV calling with multiple variant callers
+* Variant normalization and annotation
+* Haplogroup and contamination analysis
+* Sample-specific mitochondrial reference generation
+
+This pipeline includes only the first SNV calling iteration  so far.
+
+Using **Nextflow DSL2** provides reproducible workflow execution and portability across computing environments.
+
 
 ## Workflow Overview
 
@@ -301,23 +319,6 @@ The workflow uses multiple variant callers:
 
 All callers operate on the filtered mitochondrial BAM.
 
-```text
-                    mtDNA BAM
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-     Mutect2        Mutserve       FreeBayes
-        │              │              │
-        ├──────────────┼──────────────┤
-        ▼              ▼
-      VarScan       BCFtools
-        │              │
-        └──────────────┴──────────────►
-                       │
-                       ▼
-                  NORMALIZE_SNVS
-```
-
 ### Mutect2
 
 `CALL_SNVS_MUTECT2`
@@ -536,7 +537,7 @@ These parameters should be defined through the project's Nextflow configuration 
 For example:
 
 ```bash
-nextflow run MitoHPC2.part.nf \
+nextflow run MitoHPC2.sr.nf \
     --reference reference.fa \
     --mt_reference rCRS.fa \
     --mtc_reference circular_mt.fa \
@@ -551,19 +552,19 @@ The exact parameter values and paths depend on the reference datasets and execut
 From the repository directory:
 
 ```bash
-nextflow run MitoHPC2.part.nf
+nextflow run MitoHPC2.sr.nf
 ```
 
 For a configuration file:
 
 ```bash
-nextflow run MitoHPC2.part.nf -c nextflow.config
+nextflow run MitoHPC2.sr.nf -c nextflow.config
 ```
 
 For a specific work directory:
 
 ```bash
-nextflow run MitoHPC2.part.nf \
+nextflow run MitoHPC2.sr.nf \
     -c nextflow.config \
     -work-dir work/
 ```
@@ -628,11 +629,11 @@ The workflow is organized into the following major stages:
 
 ## Notes
 
-`MitoHPC2.part.nf` is a **pipeline component rather than a completely self-contained software distribution**. In particular, it depends on project-specific scripts and externally installed bioinformatics tools.
+`MitoHPC2.sr.nf` is a **pipeline component rather than a completely self-contained software distribution**. In particular, it depends on project-specific scripts and externally installed bioinformatics tools.
 
 The workflow also assumes that the required `params.*` values are supplied through the surrounding project configuration.
 
 For the current implementation, see:
 
-[MitoHPC3 — MitoHPC2.part.nf](https://github.com/dpuiu/MitoHPC3/blob/main/MitoHPC2.part.nf?utm_source=chatgpt.com)
+[MitoHPC3 — MitoHPC2.sr.nf](https://github.com/dpuiu/MitoHPC3/blob/main/MitoHPC2.part.nf?utm_source=chatgpt.com)
 
