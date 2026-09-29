@@ -1,0 +1,113 @@
+---
+config:
+  theme: redux-color
+---
+
+flowchart LR
+
+    subgraph gALIGN["ALIGN READS TO REFERENCE"]
+        direction TB
+        READS[/FASTQ READS<br><br>sr:Illumina<br>lr:PacBio|ONT/]
+        REF[/REFERENCE GENOME<br><br>hg19|hg38|chm13/]
+
+        ALIGN_REFERENCE[["ALIGN_REFERENCE<br>sr:bwa mem<br>lr:minimap2"]]
+
+        READS --> ALIGN_REFERENCE
+        REF --> ALIGN_REFERENCE
+    end
+
+    CRAM[/WGS_ALIGNMENTS/]
+
+    subgraph gCN["GET MT COPY NUMBER"]
+        direction TB
+        COMPUTE_ALIGNMENT_STATS
+        COMPUTE_MTDNA_COPY_NUMBER
+        CALCULATE_SUBSAMPLING_RATE
+        CN[/MTDNA-CN/]
+        GET_HET_THOLD
+
+        COMPUTE_ALIGNMENT_STATS --> COMPUTE_MTDNA_COPY_NUMBER --> CN --> GET_HET_THOLD
+        COMPUTE_ALIGNMENT_STATS --> CALCULATE_SUBSAMPLING_RATE
+    end
+
+    R[/SUBSAMPLING_RATIO/]
+
+    subgraph gREALIGN["REALIGN SAMPLED READS TO MT|NUMTS"]
+        direction TB
+        RCRS[/<b>RCRS</b>/]
+        NUMTS[/<b>NUMTS</b>/]
+
+        FILTER_SUBSAMPLE_AND_TRIM
+        REALIGN_CIRCULARIZED_MT
+        REALIGN_NUMTS["REALIGN_NUMTS<br>sr"]
+        COMPARE_SCORES["COMPARE_SCORES<br>sr"]
+        SELECT_MT_READS["SELECT_MT_READS<br>sr|lr"]
+        FILTER_MT_ALIGNMENTS
+        COMPUTE_MT_COVERAGE
+        IDENTIFY_SPLIT_ALIGNMENTS["IDENTIFY_SPLIT_ALIGNMENTS<br>sr|lr"]
+
+        FILTER_SUBSAMPLE_AND_TRIM --> REALIGN_CIRCULARIZED_MT
+        RCRS --> REALIGN_CIRCULARIZED_MT
+
+        FILTER_SUBSAMPLE_AND_TRIM --> REALIGN_NUMTS
+        NUMTS --> REALIGN_NUMTS
+
+        REALIGN_CIRCULARIZED_MT --> COMPARE_SCORES
+        REALIGN_NUMTS --> COMPARE_SCORES
+        COMPARE_SCORES --> SELECT_MT_READS
+        SELECT_MT_READS --> FILTER_MT_ALIGNMENTS
+        FILTER_MT_ALIGNMENTS --> COMPUTE_MT_COVERAGE
+        FILTER_MT_ALIGNMENTS --> IDENTIFY_SPLIT_ALIGNMENTS
+    end
+
+    BAM[/MT_ALIGNMENTS/]
+
+    subgraph gCALL_SNVS["CALL SNVS"]
+        direction TB
+        CALL_SNVS[["CALL SNVS:<br>sr:mutect2|freebayes|varscan<br>lr:deepsomatic|clairs-to"]]
+        NORMALIZE_SNVS
+        ANNOTATE_SNVS[["ANNOTATE_SNVS:<br>Hom,Het<br>dbSNP,genes<br>MCC,MLC..."]]
+
+        CALL_SNVS --> NORMALIZE_SNVS
+        NORMALIZE_SNVS --> ANNOTATE_SNVS
+    end
+
+    SNVS[/SNVS/]
+
+    subgraph gMT["COMPUTE NEW MT"]
+        direction TB
+        CHECK_CONTAMINATION{CHECK<br>CONTAMINATION}
+
+        CHECK_CONTAMINATION --> |Yes|REMOVE_SAMPLE
+        CHECK_CONTAMINATION --> |No|COMPUTE_SAMPLE_MT
+    
+        COMPUTE_SAMPLE_MT --> IDENTIFY_HAPLOGROUP
+    end
+
+    subgraph gMERGE_SNVS["ADD SAMPLE SNVS TO COLLECTION"]
+       direction TB
+       MERGE_SNV_FILES --> FILTER_HET_THOLD --> COMPUTE_HET_STATISTICS
+    end
+
+    MT[/SAPLE_MT_CONSENSUS/]
+
+    gALIGN -.-> CRAM
+    CRAM --> gCN
+
+    gCN --> CN
+    gCN --> R
+
+    R --> gREALIGN
+    CRAM --> gREALIGN
+
+    gREALIGN --> BAM --> gCALL_SNVS
+    gCALL_SNVS --> SNVS --> gMT --> MT -->|2nd iteration| gREALIGN
+    SNVS --> gMERGE_SNVS
+    CHECK_CONTAMINATION --> |No| gMERGE_SNVS
+
+    style gALIGN fill:#DCEEFF,stroke:#2F6DAE
+    style gCN fill:#E2F3E4,stroke:#4B8B3B
+    style gREALIGN fill:#FFF1CC,stroke:#B8860B
+    style gCALL_SNVS fill:#E9DDF7,stroke:#7652A3
+    style gMT fill:#FCE1D0,stroke:#C66A2B
+    style gMERGE_SNVS fill:#A9ADA7,stroke:#7652A3
